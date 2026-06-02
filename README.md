@@ -1,3 +1,12 @@
+<pre align="center">
+ ██████╗ ███████╗██╗  ██╗
+██╔═══██╗██╔════╝██║  ██║
+██║   ██║███████╗███████║
+██║   ██║╚════██║██╔══██║
+╚██████╔╝███████║██║  ██║
+ ╚═════╝ ╚══════╝╚═╝  ╚═╝
+</pre>
+
 <h1 align="center">OpenSiliconHub</h1>
 
 <p align="center">
@@ -93,20 +102,6 @@ If you run into any issues or want help contributing, feel free to open a Discus
 
 ---
 
-##  Tools Used
-
-### Software (Commonly Used)
-- [Icarus Verilog](http://iverilog.icarus.com/) — Simulation  
-- [Verilator](https://www.veripool.org/verilator/) — Linting & static checks  
-- [GTKWave](http://gtkwave.sourceforge.net/) — Waveform viewing  
-- [EDA Playground](https://www.edaplayground.com/) — Quick online testing
-
-
-### Hardware Targets for Benchmarks  
-- **Lattice iCE40 UP5K**  
-- **Xilinx Artix-7 XC7A35T**
-
----
 
 ##  Citation
 

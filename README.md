@@ -10,10 +10,6 @@
 <h1 align="center">OpenSiliconHub</h1>
 
 <p align="center">
-<!-- DOI Badge (Shields.io fallback) -->
-  <a href="https://doi.org/10.5281/zenodo.17895634">
-    <img src="https://img.shields.io/badge/DOI-10.5281/zenodo.17895634-blue" alt="DOI">
-  </a>
  <!-- Visitors Count -->
   <a href="https://komarev.com/ghpvc/?username=MrAbhi19&color=blue">
     <img src="https://komarev.com/ghpvc/?username=MrAbhi19&color=blue" alt="Profile Visitors">

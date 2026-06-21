@@ -5,9 +5,10 @@
 ██║   ██║╚════██║██╔══██║
 ╚██████╔╝███████║██║  ██║
  ╚═════╝ ╚══════╝╚═╝  ╚═╝
+
+ OSH-LIBRARY
 </pre>
 
-<h1 align="center">OpenSiliconHub</h1>
 
 <p align="center">
 <!-- DOI Badge (Shields.io fallback) -->

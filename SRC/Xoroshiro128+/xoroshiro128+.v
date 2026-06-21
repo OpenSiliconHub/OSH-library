@@ -51,7 +51,8 @@ module xoroshiro128plus (
   output reg [63:0] out   // Random number output
 );
 
-  reg [63:0] s0, s1;      // Internal state registers
+  reg [63:0] s0, s1;   
+  wire [63:0] int1;
 
   // Rotate left function
   // Rotates a 64-bit word x left by k bits.
@@ -64,6 +65,8 @@ module xoroshiro128plus (
     end
   endfunction
 
+  assign int1 = s1 ^ s0;
+
   always @(posedge clk or posedge rst) begin
     if (rst) begin
       // Initialize state from seed when reset is asserted
@@ -74,10 +77,9 @@ module xoroshiro128plus (
       // Step 1: Output random number
       out <= s0 + s1;
 
-      // Step 2: Update state
-      s1 <= s1 ^ s0;                          // XOR step
-      s0 <= rotl(s0, 55) ^ s1 ^ (s1 << 14);   // Rotate left, XOR, and shift
-      s1 <= rotl(s1, 36);                     // Rotate left
+      // Step 2: Update state                       // XOR step
+      s0 <= rotl(s0, 55) ^ int1 ^ (int1 << 14);   // Rotate left, XOR, and shift
+      s1 <= rotl(int1, 36);                     // Rotate left
     end
   end
 endmodule

@@ -43,6 +43,11 @@ module xorshift32 (
 );
 
   reg [31:0] state;        // Internal state register
+  wire [31:0] x1, x2, x3;
+
+  assign x1 = state ^ (state << 13); // Step 1: XOR with left shift by 13
+  assign x2 = x1 ^ (x1 >> 17); // Step 2: XOR with right shift by 17
+  assign x3 = x2 ^ (x2 << 5); // Step 3: XOR with left shift by 5
 
   // Sequential logic: update state and output on clock or reset
   always @(posedge clk or posedge rst) begin
@@ -51,11 +56,8 @@ module xorshift32 (
       out   <= 0;           // Clear output on reset
     end else if (en) begin
       // Xorshift32 algorithm steps:
-      state <= state ^ (state << 13); // Step 1: XOR with left shift by 13
-      state <= state ^ (state >> 17); // Step 2: XOR with right shift by 17
-      state <= state ^ (state << 5);  // Step 3: XOR with left shift by 5
-
-      out   <= state;       // Update output with new state
+      state <= x3;
+      out   <= x3;       // Update output with new state
     end
   end
 

@@ -27,13 +27,11 @@ jobs:
           status=0
 
           # Find all RTL.v and RTL.sv files under SRC
-          find SRC -type f \( -name "*.v" -o -name "*.sv" \) | while read file; do
-            echo "--------------------------------------------"
-            echo "Linting $file ..."
-            verilator \
-              --lint-only \
-              -Wall 
-            echo "--------------------------------------------"
+          find SRC -type f \( -name "*.v" -o -name "*.sv" \) | while read -r file; do
+            echo "FILE=<$file>"
+            printf 'QUOTED=%q\n' "$file"
+
+            verilator --lint-only "$file"
           done
 
           exit $status

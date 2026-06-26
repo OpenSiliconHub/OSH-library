@@ -1,7 +1,12 @@
-name: Verilog Lint (Strict Mode)
+name: Verilog/SystemVerilog Lint (Strict Mode)
 
 on:
-  workflow_dispatch:   # Manual trigger only
+  push:
+    branches:
+      - '**'
+  pull_request:
+    branches:
+      - '**'
 
 jobs:
   lint:
@@ -9,22 +14,30 @@ jobs:
 
     steps:
       - name: Checkout code
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
 
       - name: Install Verilator
         run: |
           sudo apt-get update
           sudo apt-get install -y verilator
 
-      - name: Run Verilator Strict Lint (per file, fail if any fails)
+      - name: Run Verilator Strict Lint
         run: |
           echo "Running per-file Verilator strict lint..."
           status=0
-          # Recursively find all RTL.v files under /SRC
-          for file in $(find SRC -type f -name "RTL.v"); do
+
+          # Find all RTL.v and RTL.sv files under SRC
+          find SRC -type f \( -name "*.v" -o -name "*.sv" \) | while read file; do
             echo "--------------------------------------------"
             echo "Linting $file ..."
-            verilator --lint-only -Wall -Wpedantic --bbox-sys --error-limit 1 "$file" || status=1
+            verilator \
+              --lint-only \
+              -Wall \
+              -Wpedantic \
+              --bbox-sys \
+              --error-limit 1 \
+              "$file" || status=1
             echo "--------------------------------------------"
           done
+
           exit $status

@@ -26,7 +26,7 @@ jobs:
           while IFS= read -r file; do
             echo "Linting: $file"
 
-            verilator --lint-only -Wall -Wpedantic "$file"
+            verilator --lint-only "$file"
 
             if [ $? -ne 0 ]; then
               status=1

@@ -2,11 +2,7 @@ name: .v/.sv Linting
 
 on:
   push:
-    branches:
-      - '**'
   pull_request:
-    branches:
-      - '**'
 
 jobs:
   lint:
@@ -22,16 +18,23 @@ jobs:
           sudo apt-get install -y verilator
 
       - name: Run Verilator Strict Lint
+        shell: bash
         run: |
-          echo "Running per-file Verilator strict lint..."
+          echo "Running Verilator lint..."
           status=0
 
-          # Find all RTL.v and RTL.sv files under SRC
-          find SRC -type f \( -name "*.v" -o -name "*.sv" \) | while read -r file; do
-            echo "FILE=<$file>"
-            printf 'QUOTED=%q\n' "$file"
+          while IFS= read -r file; do
+            echo "Linting: $file"
 
-            verilator --lint-only "$file"
-          done
+            verilator --lint-only -Wall -Wpedantic "$file"
+
+            if [ $? -ne 0 ]; then
+              status=1
+            fi
+          done < <(
+            find SRC -type f \( -name "*.v" -o -name "*.sv" \) \
+              ! -name "*_tb.v" \
+              ! -name "*_tb.sv"
+          )
 
           exit $status

@@ -36,7 +36,9 @@ jobs:
               ! -name "*_tb.v" \
               ! -name "*_tb.sv" \
               ! -name "testbench.v" \
-              ! -name "testbench.sv"
+              ! -name "testbench.sv" \
+              ! -name "*_tb1.v" \
+              ! -name "*_tb2.v"
               
           )
 
